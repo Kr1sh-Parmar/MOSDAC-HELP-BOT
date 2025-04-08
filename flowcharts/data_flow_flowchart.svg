@@ -1,0 +1,145 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="800" height="600" viewBox="0 0 800 600">
+  <!-- Styles -->
+  <defs>
+    <style type="text/css">
+      .box { fill: #f0f8ff; stroke: #4682b4; stroke-width: 2; }
+      .process { fill: #e6f3ff; stroke: #4682b4; stroke-width: 2; rx: 10; ry: 10; }
+      .data { fill: #fffacd; stroke: #daa520; stroke-width: 2; }
+      .component { fill: #e6ffe6; stroke: #228b22; stroke-width: 2; rx: 5; ry: 5; }
+      .arrow { stroke: #708090; stroke-width: 2; marker-end: url(#arrowhead); }
+      .text { font-family: Arial; font-size: 14px; fill: #333; }
+      .title { font-family: Arial; font-size: 18px; font-weight: bold; fill: #333; }
+      .subtitle { font-family: Arial; font-size: 14px; font-style: italic; fill: #555; }
+      .step { font-family: Arial; font-size: 12px; fill: #666; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#708090" />
+    </marker>
+  </defs>
+  
+  <!-- Title -->
+  <text x="400" y="30" text-anchor="middle" class="title">Data Flow in RAG System</text>
+  <text x="400" y="50" text-anchor="middle" class="subtitle">From JSON data to API response</text>
+  
+  <!-- Data Source -->
+  <rect x="50" y="100" width="120" height="60" class="data" />
+  <text x="110" y="135" text-anchor="middle" class="text">JSON Data</text>
+  <text x="110" y="155" text-anchor="middle" class="step">(data.json)</text>
+  
+  <!-- Data Processing -->
+  <rect x="250" y="100" width="140" height="60" class="process" />
+  <text x="320" y="125" text-anchor="middle" class="text">Data Processing</text>
+  <text x="320" y="145" text-anchor="middle" class="step">hierarchical_chunking()</text>
+  
+  <!-- Embedding Generation -->
+  <rect x="450" y="100" width="140" height="60" class="process" />
+  <text x="520" y="125" text-anchor="middle" class="text">Embedding Generation</text>
+  <text x="520" y="145" text-anchor="middle" class="step">generate_embeddings()</text>
+  
+  <!-- Processed Data -->
+  <rect x="250" y="200" width="140" height="60" class="data" />
+  <text x="320" y="225" text-anchor="middle" class="text">Processed Chunks</text>
+  <text x="320" y="245" text-anchor="middle" class="step">(chunks.json)</text>
+  
+  <!-- Embeddings -->
+  <rect x="450" y="200" width="140" height="60" class="data" />
+  <text x="520" y="225" text-anchor="middle" class="text">Embeddings</text>
+  <text x="520" y="245" text-anchor="middle" class="step">(vectors.npy)</text>
+  
+  <!-- User Query -->
+  <rect x="50" y="300" width="120" height="60" class="data" />
+  <text x="110" y="335" text-anchor="middle" class="text">User Query</text>
+  
+  <!-- Query Processing -->
+  <rect x="250" y="300" width="140" height="60" class="process" />
+  <text x="320" y="325" text-anchor="middle" class="text">Query Processing</text>
+  <text x="320" y="345" text-anchor="middle" class="step">encode(query)</text>
+  
+  <!-- Cache Check -->
+  <path d="M 450,300 L 520,300 L 590,330 L 520,360 L 450,360 Z" class="process" />
+  <text x="520" y="335" text-anchor="middle" class="text">Cache Check</text>
+  
+  <!-- Retrieval -->
+  <rect x="250" y="400" width="140" height="60" class="process" />
+  <text x="320" y="425" text-anchor="middle" class="text">Retrieval</text>
+  <text x="320" y="445" text-anchor="middle" class="step">hybrid_search()</text>
+  
+  <!-- Context Building -->
+  <rect x="450" y="400" width="140" height="60" class="process" />
+  <text x="520" y="425" text-anchor="middle" class="text">Context Building</text>
+  <text x="520" y="445" text-anchor="middle" class="step">build_context()</text>
+  
+  <!-- API Request -->
+  <rect x="250" y="500" width="340" height="60" class="process" />
+  <text x="420" y="525" text-anchor="middle" class="text">API Request to Gemini</text>
+  <text x="420" y="545" text-anchor="middle" class="step">query_gemini(prompt)</text>
+  
+  <!-- Response -->
+  <rect x="650" y="400" width="120" height="60" class="data" />
+  <text x="710" y="435" text-anchor="middle" class="text">API Response</text>
+  
+  <!-- Evaluation -->
+  <rect x="650" y="300" width="120" height="60" class="process" />
+  <text x="710" y="325" text-anchor="middle" class="text">Evaluation</text>
+  <text x="710" y="345" text-anchor="middle" class="step">log_query()</text>
+  
+  <!-- Cache Update -->
+  <rect x="650" y="200" width="120" height="60" class="process" />
+  <text x="710" y="225" text-anchor="middle" class="text">Cache Update</text>
+  <text x="710" y="245" text-anchor="middle" class="step">set(query, response)</text>
+  
+  <!-- Arrows -->
+  <!-- Data processing flow -->
+  <line x1="170" y1="130" x2="250" y2="130" class="arrow" />
+  <line x1="390" y1="130" x2="450" y2="130" class="arrow" />
+  <line x1="320" y1="160" x2="320" y2="200" class="arrow" />
+  <line x1="520" y1="160" x2="520" y2="200" class="arrow" />
+  
+  <!-- Query flow -->
+  <line x1="170" y1="330" x2="250" y2="330" class="arrow" />
+  <line x1="390" y1="330" x2="450" y2="330" class="arrow" />
+  
+  <!-- Cache hit path -->
+  <line x1="590" y1="330" x2="650" y2="330" stroke-dasharray="5,5" class="arrow" />
+  <text x="620" y="315" class="step">Cache Hit</text>
+  
+  <!-- Cache miss path -->
+  <line x1="520" y1="360" x2="520" y2="400" class="arrow" />
+  <text x="535" y="380" class="step">Cache Miss</text>
+  
+  <!-- Retrieval flow -->
+  <line x1="320" y1="360" x2="320" y2="400" class="arrow" />
+  <line x1="390" y1="430" x2="450" y2="430" class="arrow" />
+  
+  <!-- Context to API -->
+  <line x1="520" y1="460" x2="520" y2="500" class="arrow" />
+  
+  <!-- API to response -->
+  <line x1="590" y1="530" x2="710" y2="530" class="arrow" />
+  <line x1="710" y1="530" x2="710" y2="460" class="arrow" />
+  
+  <!-- Response to evaluation -->
+  <line x1="710" y1="400" x2="710" y2="360" class="arrow" />
+  
+  <!-- Evaluation to cache -->
+  <line x1="710" y1="300" x2="710" y2="260" class="arrow" />
+  
+  <!-- Data connections -->
+  <line x1="320" y1="260" x2="320" y2="300" stroke-dasharray="5,5" class="arrow" />
+  <line x1="520" y1="260" x2="520" y2="300" stroke-dasharray="5,5" class="arrow" />
+  <line x1="320" y1="260" x2="250" y2="400" stroke-dasharray="5,5" class="arrow" />
+  <line x1="520" y1="260" x2="390" y2="400" stroke-dasharray="5,5" class="arrow" />
+  
+  <!-- Legend -->
+  <rect x="50" y="500" width="15" height="15" class="data" />
+  <text x="70" y="513" class="text" font-size="12">Data</text>
+  
+  <rect x="50" y="520" width="15" height="15" class="process" />
+  <text x="70" y="533" class="text" font-size="12">Process</text>
+  
+  <line x1="50" y1="550" x2="65" y2="550" class="arrow" />
+  <text x="70" y="553" class="text" font-size="12">Data Flow</text>
+  
+  <line x1="50" y1="570" x2="65" y2="570" stroke-dasharray="5,5" class="arrow" />
+  <text x="70" y="573" class="text" font-size="12">Optional Flow</text>
+</svg>

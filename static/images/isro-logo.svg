@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- ISRO Logo Stylized for Dark Theme -->
+  <defs>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7b68ee" />
+      <stop offset="100%" stop-color="#4169e1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Outer Circle -->
+  <circle cx="100" cy="100" r="90" fill="none" stroke="url(#logoGradient)" stroke-width="3" />
+  
+  <!-- Inner Elements -->
+  <circle cx="100" cy="100" r="70" fill="none" stroke="#00bfff" stroke-width="2" stroke-dasharray="5,3" />
+  
+  <!-- Satellite Orbit -->
+  <ellipse cx="100" cy="100" rx="60" ry="30" fill="none" stroke="url(#logoGradient)" stroke-width="2" transform="rotate(30 100 100)" />
+  
+  <!-- Satellite -->
+  <circle cx="160" cy="85" r="6" fill="#ffffff" />
+  
+  <!-- Text -->
+  <text x="100" y="90" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">ISRO</text>
+  <text x="100" y="115" font-family="Arial, sans-serif" font-size="14" fill="#e0e0e0" text-anchor="middle">MOSDAC</text>
+  <text x="100" y="135" font-family="Arial, sans-serif" font-size="10" fill="#a0a0a0" text-anchor="middle">Meteorological &amp; Oceanographic</text>
+</svg>

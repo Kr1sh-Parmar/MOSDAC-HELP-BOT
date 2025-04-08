@@ -1,0 +1,168 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="800" height="600" viewBox="0 0 800 600">
+  <!-- Styles -->
+  <defs>
+    <style type="text/css">
+      .box { fill: #f0f8ff; stroke: #4682b4; stroke-width: 2; }
+      .process { fill: #e6f3ff; stroke: #4682b4; stroke-width: 2; rx: 10; ry: 10; }
+      .data { fill: #fffacd; stroke: #daa520; stroke-width: 2; }
+      .component { fill: #e6ffe6; stroke: #228b22; stroke-width: 2; rx: 5; ry: 5; }
+      .subcomponent { fill: #f0fff0; stroke: #228b22; stroke-width: 1.5; rx: 3; ry: 3; }
+      .metric { fill: #ffe6e6; stroke: #b22222; stroke-width: 1.5; rx: 5; ry: 5; }
+      .arrow { stroke: #708090; stroke-width: 2; marker-end: url(#arrowhead); }
+      .text { font-family: Arial; font-size: 14px; fill: #333; }
+      .title { font-family: Arial; font-size: 18px; font-weight: bold; fill: #333; }
+      .subtitle { font-family: Arial; font-size: 14px; font-style: italic; fill: #555; }
+      .small-text { font-family: Arial; font-size: 12px; fill: #666; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#708090" />
+    </marker>
+  </defs>
+  
+  <!-- Title -->
+  <text x="400" y="30" text-anchor="middle" class="title">RAG System Structure</text>
+  <text x="400" y="50" text-anchor="middle" class="subtitle">Components, Retrieval Methods, and Evaluation Metrics</text>
+  
+  <!-- Advanced Retrieval System -->
+  <rect x="50" y="80" width="300" height="220" class="box" />
+  <text x="200" y="100" text-anchor="middle" class="text">Advanced Retrieval System</text>
+  
+  <!-- Retrieval Components -->
+  <rect x="70" y="120" width="120" height="50" class="component" />
+  <text x="130" y="150" text-anchor="middle" class="text">Hybrid Search</text>
+  
+  <rect x="210" y="120" width="120" height="50" class="component" />
+  <text x="270" y="150" text-anchor="middle" class="text">MMR Reranking</text>
+  
+  <rect x="70" y="190" width="120" height="50" class="component" />
+  <text x="130" y="220" text-anchor="middle" class="text">BM25 Search</text>
+  
+  <rect x="210" y="190" width="120" height="50" class="component" />
+  <text x="270" y="220" text-anchor="middle" class="text">Contextual Search</text>
+  
+  <!-- Subcomponents -->
+  <rect x="80" y="240" width="100" height="30" class="subcomponent" />
+  <text x="130" y="260" text-anchor="middle" class="small-text">Semantic Search</text>
+  
+  <rect x="200" y="240" width="130" height="30" class="subcomponent" />
+  <text x="265" y="260" text-anchor="middle" class="small-text">Conversation History</text>
+  
+  <!-- Caching System -->
+  <rect x="50" y="320" width="300" height="160" class="box" />
+  <text x="200" y="340" text-anchor="middle" class="text">Caching System</text>
+  
+  <!-- Cache Components -->
+  <rect x="70" y="360" width="120" height="50" class="component" />
+  <text x="130" y="390" text-anchor="middle" class="text">Query Cache</text>
+  
+  <rect x="210" y="360" width="120" height="50" class="component" />
+  <text x="270" y="390" text-anchor="middle" class="text">TTL Management</text>
+  
+  <!-- Cache Metrics -->
+  <rect x="70" y="420" width="120" height="40" class="metric" />
+  <text x="130" y="445" text-anchor="middle" class="small-text">Cache Hit Rate</text>
+  
+  <rect x="210" y="420" width="120" height="40" class="metric" />
+  <text x="270" y="445" text-anchor="middle" class="small-text">Cache Size</text>
+  
+  <!-- Evaluation System -->
+  <rect x="450" y="80" width="300" height="220" class="box" />
+  <text x="600" y="100" text-anchor="middle" class="text">Evaluation System</text>
+  
+  <!-- Evaluation Components -->
+  <rect x="470" y="120" width="120" height="50" class="component" />
+  <text x="530" y="150" text-anchor="middle" class="text">RAG Evaluator</text>
+  
+  <rect x="610" y="120" width="120" height="50" class="component" />
+  <text x="670" y="150" text-anchor="middle" class="text">Query Analyzer</text>
+  
+  <!-- Evaluation Metrics -->
+  <rect x="470" y="190" width="120" height="40" class="metric" />
+  <text x="530" y="215" text-anchor="middle" class="small-text">Latency</text>
+  
+  <rect x="610" y="190" width="120" height="40" class="metric" />
+  <text x="670" y="215" text-anchor="middle" class="small-text">Retrieval Precision</text>
+  
+  <rect x="470" y="240" width="120" height="40" class="metric" />
+  <text x="530" y="265" text-anchor="middle" class="small-text">Token Usage</text>
+  
+  <rect x="610" y="240" width="120" height="40" class="metric" />
+  <text x="670" y="265" text-anchor="middle" class="small-text">Query Patterns</text>
+  
+  <!-- Generation System -->
+  <rect x="450" y="320" width="300" height="160" class="box" />
+  <text x="600" y="340" text-anchor="middle" class="text">Generation System</text>
+  
+  <!-- Generation Components -->
+  <rect x="470" y="360" width="120" height="50" class="component" />
+  <text x="530" y="390" text-anchor="middle" class="text">Prompt Builder</text>
+  
+  <rect x="610" y="360" width="120" height="50" class="component" />
+  <text x="670" y="390" text-anchor="middle" class="text">Gemini API</text>
+  
+  <!-- Generation Metrics -->
+  <rect x="470" y="420" width="120" height="40" class="metric" />
+  <text x="530" y="445" text-anchor="middle" class="small-text">Response Time</text>
+  
+  <rect x="610" y="420" width="120" height="40" class="metric" />
+  <text x="670" y="445" text-anchor="middle" class="small-text">Response Quality</text>
+  
+  <!-- System Integration -->
+  <rect x="250" y="500" width="300" height="80" class="box" />
+  <text x="400" y="520" text-anchor="middle" class="text">System Integration</text>
+  
+  <!-- Integration Components -->
+  <rect x="270" y="530" width="120" height="40" class="component" />
+  <text x="330" y="555" text-anchor="middle" class="text">Flask API</text>
+  
+  <rect x="410" y="530" width="120" height="40" class="component" />
+  <text x="470" y="555" text-anchor="middle" class="text">Web Interface</text>
+  
+  <!-- Arrows -->
+  <!-- Retrieval connections -->
+  <line x1="130" y1="170" x2="130" y2="190" class="arrow" />
+  <line x1="270" y1="170" x2="270" y2="190" class="arrow" />
+  <line x1="130" y1="240" x2="130" y2="220" class="arrow" />
+  <line x1="270" y1="240" x2="270" y2="220" class="arrow" />
+  
+  <!-- Cache connections -->
+  <line x1="130" y1="410" x2="130" y2="420" class="arrow" />
+  <line x1="270" y1="410" x2="270" y2="420" class="arrow" />
+  
+  <!-- Evaluation connections -->
+  <line x1="530" y1="170" x2="530" y2="190" class="arrow" />
+  <line x1="670" y1="170" x2="670" y2="190" class="arrow" />
+  <line x1="530" y1="230" x2="530" y2="240" class="arrow" />
+  <line x1="670" y1="230" x2="670" y2="240" class="arrow" />
+  
+  <!-- Generation connections -->
+  <line x1="530" y1="410" x2="530" y2="420" class="arrow" />
+  <line x1="670" y1="410" x2="670" y2="420" class="arrow" />
+  
+  <!-- System connections -->
+  <line x1="200" y1="300" x2="200" y2="320" class="arrow" />
+  <line x1="600" y1="300" x2="600" y2="320" class="arrow" />
+  <line x1="350" y1="190" x2="450" y2="190" class="arrow" />
+  <line x1="350" y1="390" x2="450" y2="390" class="arrow" />
+  <line x1="600" y1="480" x2="600" y2="500" stroke-dasharray="5,5" class="arrow" />
+  <line x1="200" y1="480" x2="200" y2="500" stroke-dasharray="5,5" class="arrow" />
+  
+  <!-- Legend -->
+  <rect x="50" y="500" width="15" height="15" class="box" />
+  <text x="70" y="513" class="small-text">System Module</text>
+  
+  <rect x="50" y="520" width="15" height="15" class="component" />
+  <text x="70" y="533" class="small-text">Component</text>
+  
+  <rect x="50" y="540" width="15" height="15" class="metric" />
+  <text x="70" y="553" class="small-text">Metric</text>
+  
+  <rect x="50" y="560" width="15" height="15" class="subcomponent" />
+  <text x="70" y="573" class="small-text">Subcomponent</text>
+  
+  <line x1="150" y1="520" x2="165" y2="520" class="arrow" />
+  <text x="185" y="523" class="small-text">Direct Connection</text>
+  
+  <line x1="150" y1="540" x2="165" y2="540" stroke-dasharray="5,5" class="arrow" />
+  <text x="185" y="543" class="small-text">Indirect Connection</text>
+</svg>

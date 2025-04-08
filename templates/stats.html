@@ -1,0 +1,201 @@
+{% extends "base.html" %}
+
+{% block title %}System Statistics - ISRO MOSDAC{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="stats-header">
+        <h1>RAG System Statistics</h1>
+        <p>Performance metrics and system information</p>
+    </div>
+    
+    <div class="stats-panel">
+        <h3><i class="fas fa-server"></i> System Information</h3>
+        <div class="stats-grid" id="system-stats">
+            <div class="stat-card">
+                <div class="stat-label">Total Chunks</div>
+                <div class="stat-value" id="chunks-count">Loading...</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Embedding Model</div>
+                <div class="stat-value" id="embedding-model">Loading...</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Retriever Type</div>
+                <div class="stat-value" id="retriever-type">Loading...</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="stats-panel">
+        <h3><i class="fas fa-database"></i> Cache Statistics</h3>
+        <div class="stats-grid" id="cache-stats">
+            <div class="stat-card">
+                <div class="stat-label">Cache Size</div>
+                <div class="stat-value" id="cache-size">Loading...</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Cache Hits</div>
+                <div class="stat-value" id="cache-hits">Loading...</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Cache Misses</div>
+                <div class="stat-value" id="cache-misses">Loading...</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Hit Rate</div>
+                <div class="stat-value" id="hit-rate">Loading...</div>
+            </div>
+        </div>
+        <div class="action-buttons">
+            <button id="clear-cache-btn" class="btn btn-secondary">
+                <i class="fas fa-trash"></i> Clear Cache
+            </button>
+        </div>
+    </div>
+    
+    <div class="stats-panel">
+        <h3><i class="fas fa-chart-line"></i> Performance Metrics</h3>
+        <div class="stats-grid" id="performance-stats">
+            <div class="stat-card">
+                <div class="stat-label">Average Latency</div>
+                <div class="stat-value" id="avg-latency">Loading...</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">P95 Latency</div>
+                <div class="stat-value" id="p95-latency">Loading...</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Total Queries</div>
+                <div class="stat-value" id="total-queries">Loading...</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="stats-panel">
+        <h3><i class="fas fa-search"></i> Query Patterns</h3>
+        <div id="query-patterns">
+            <p>Loading frequent queries...</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const clearCacheBtn = document.getElementById('clear-cache-btn');
+        
+        // Load statistics
+        fetchStats();
+        
+        // Set up event listeners
+        clearCacheBtn.addEventListener('click', clearCache);
+        
+        // Fetch statistics from the server
+        function fetchStats() {
+            fetch('/stats')
+                .then(response => response.json())
+                .then(data => {
+                    updateSystemStats(data.system);
+                    updateCacheStats(data.cache);
+                    updatePerformanceStats(data.evaluation);
+                    updateQueryPatterns(data.query_patterns);
+                })
+                .catch(error => {
+                    console.error('Error fetching stats:', error);
+                });
+        }
+        
+        // Update system statistics
+        function updateSystemStats(systemData) {
+            if (!systemData) return;
+            
+            document.getElementById('chunks-count').textContent = systemData.chunks_count.toLocaleString();
+            document.getElementById('embedding-model').textContent = systemData.embedding_model;
+            document.getElementById('retriever-type').textContent = 
+                systemData.advanced_retriever ? 'Advanced (MMR + BM25)' : 'Simple';
+        }
+        
+        // Update cache statistics
+        function updateCacheStats(cacheData) {
+            if (!cacheData) {
+                document.getElementById('cache-stats').innerHTML = 
+                    '<p>Caching is not enabled or no cache data available.</p>';
+                return;
+            }
+            
+            document.getElementById('cache-size').textContent = 
+                `${cacheData.size} / ${cacheData.max_size}`;
+            document.getElementById('cache-hits').textContent = cacheData.hits.toLocaleString();
+            document.getElementById('cache-misses').textContent = cacheData.misses.toLocaleString();
+            document.getElementById('hit-rate').textContent = cacheData.hit_rate;
+        }
+        
+        // Update performance metrics
+        function updatePerformanceStats(evalData) {
+            if (!evalData) {
+                document.getElementById('performance-stats').innerHTML = 
+                    '<p>No evaluation data available yet.</p>';
+                return;
+            }
+            
+            document.getElementById('avg-latency').textContent = 
+                `${evalData.avg_latency.toFixed(2)}s`;
+            document.getElementById('p95-latency').textContent = 
+                `${evalData.p95_latency.toFixed(2)}s`;
+            document.getElementById('total-queries').textContent = 
+                evalData.total_queries.toLocaleString();
+        }
+        
+        // Update query patterns
+        function updateQueryPatterns(patternData) {
+            const patternsDiv = document.getElementById('query-patterns');
+            
+            if (!patternData || !patternData.frequent_queries || 
+                Object.keys(patternData.frequent_queries).length === 0) {
+                patternsDiv.innerHTML = '<p>No frequent queries detected yet.</p>';
+                return;
+            }
+            
+            let html = '<table class="query-table">';
+            html += '<thead><tr><th>Query</th><th>Frequency</th></tr></thead><tbody>';
+            
+            Object.entries(patternData.frequent_queries).forEach(([query, count]) => {
+                html += `<tr><td>${query}</td><td>${count}</td></tr>`;
+            });
+            
+            html += '</tbody></table>';
+            patternsDiv.innerHTML = html;
+        }
+        
+        // Clear the cache
+        function clearCache() {
+            clearCacheBtn.disabled = true;
+            clearCacheBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Clearing...';
+            
+            fetch('/clear-cache', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        alert('Cache cleared successfully!');
+                        fetchStats(); // Refresh stats
+                    } else {
+                        alert(`Error: ${data.message}`);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error clearing cache:', error);
+                    alert('An error occurred while clearing the cache.');
+                })
+                .finally(() => {
+                    clearCacheBtn.disabled = false;
+                    clearCacheBtn.innerHTML = '<i class="fas fa-trash"></i> Clear Cache';
+                });
+        }
+        
+        // Refresh stats every 30 seconds
+        setInterval(fetchStats, 30000);
+    });
+</script>
+{% endblock %}

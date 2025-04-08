@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% block title %}AI Chat - ISRO MOSDAC{% endblock %}
+
+{% block content %}
+<div class="chat-container">
+    <div class="chat-header">
+        <h1>ISRO MOSDAC AI Chat</h1>
+        <p>Ask questions about meteorological and oceanographic satellite data</p>
+    </div>
+    
+    <div id="chat-box" class="chat-box">
+        <div class="bot-message message">
+            <p>Hello! I'm the ISRO MOSDAC AI assistant. How can I help you with meteorological and oceanographic satellite data today?</p>
+        </div>
+    </div>
+    
+    <div class="chat-input-container">
+        <input type="text" id="chat-input" class="chat-input" placeholder="Ask a question..." autofocus>
+        <button id="send-btn" class="send-btn">
+            <i class="fas fa-paper-plane"></i> Send
+        </button>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const chatBox = document.getElementById('chat-box');
+        const chatInput = document.getElementById('chat-input');
+        const sendBtn = document.getElementById('send-btn');
+        
+        // Generate a session ID for conversation tracking
+        const sessionId = 'session_' + Math.random().toString(36).substring(2, 15);
+        console.log('Session ID:', sessionId);
+        
+        // Track conversation history
+        let conversationHistory = [];
+
+        function sendMessage() {
+            const query = chatInput.value.trim();
+            if (!query) return;
+            
+            // Add user message to chat
+            addMessage('user', query);
+            chatInput.value = '';
+            
+            // Add to conversation history
+            conversationHistory.push(query);
+            if (conversationHistory.length > 10) {
+                conversationHistory.shift();
+            }
+            
+            // Show loading indicator
+            const loadingDiv = document.createElement('div');
+            loadingDiv.className = 'bot-message message';
+            loadingDiv.innerHTML = '<p><i class="fas fa-spinner fa-spin"></i> Processing your request...</p>';
+            chatBox.appendChild(loadingDiv);
+            
+            // Scroll to bottom
+            chatBox.scrollTop = chatBox.scrollHeight;
+            
+            // Send request to server with session ID
+            fetch('/ask', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    query: query,
+                    session_id: sessionId
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Remove loading indicator
+                chatBox.removeChild(loadingDiv);
+                
+                // Add bot response
+                addMessage('bot', data.answer);
+                
+                // Create a container for metadata
+                let metadataHtml = '<div class="message-metadata">';
+                
+                // Add latency information if available
+                if (data.latency) {
+                    metadataHtml += `<div class="latency"><i class="fas fa-clock"></i> ${data.latency}</div>`;
+                }
+                
+                // Add sources with improved formatting
+                if (data.sources && data.sources.length > 0) {
+                    metadataHtml += '<div class="sources"><i class="fas fa-book"></i> Sources: ';
+                    data.sources.forEach((source, index) => {
+                        if (source.title) {
+                            metadataHtml += `<span class="source-item">${source.title}`;
+                            if (source.url) {
+                                metadataHtml += ` <a href="${source.url}" target="_blank"><i class="fas fa-external-link-alt"></i></a>`;
+                            }
+                            metadataHtml += '</span>';
+                            if (index < data.sources.length - 1) metadataHtml += ', ';
+                        }
+                    });
+                    metadataHtml += '</div>';
+                }
+                
+                metadataHtml += '</div>';
+                
+                // Add metadata to the message
+                const lastMessage = chatBox.lastElementChild;
+                lastMessage.innerHTML += metadataHtml;
+            })
+            .catch(error => {
+                // Remove loading indicator
+                chatBox.removeChild(loadingDiv);
+                
+                // Show error message
+                addMessage('bot', 'Sorry, there was an error processing your request. Please try again.');
+                console.error('Error:', error);
+            });
+        }
+        
+        function addMessage(type, content) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = type + '-message message';
+            messageDiv.innerHTML = `<p>${content}</p>`;
+            chatBox.appendChild(messageDiv);
+            
+            // Scroll to bottom
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+        
+        // Event listeners
+        sendBtn.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') sendMessage();
+        });
+    });
+</script>
+{% endblock %}

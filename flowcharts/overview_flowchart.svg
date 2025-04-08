@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="800" height="600" viewBox="0 0 800 600">
+  <!-- Styles -->
+  <defs>
+    <style type="text/css">
+      .box { fill: #f0f8ff; stroke: #4682b4; stroke-width: 2; }
+      .process { fill: #e6f3ff; stroke: #4682b4; stroke-width: 2; rx: 10; ry: 10; }
+      .data { fill: #fffacd; stroke: #daa520; stroke-width: 2; }
+      .component { fill: #e6ffe6; stroke: #228b22; stroke-width: 2; rx: 5; ry: 5; }
+      .arrow { stroke: #708090; stroke-width: 2; marker-end: url(#arrowhead); }
+      .text { font-family: Arial; font-size: 14px; fill: #333; }
+      .title { font-family: Arial; font-size: 18px; font-weight: bold; fill: #333; }
+      .subtitle { font-family: Arial; font-size: 14px; font-style: italic; fill: #555; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#708090" />
+    </marker>
+  </defs>
+  
+  <!-- Title -->
+  <text x="400" y="30" text-anchor="middle" class="title">Enhanced RAG System - Overview</text>
+  <text x="400" y="50" text-anchor="middle" class="subtitle">High-level architecture and data flow</text>
+  
+  <!-- Data Sources -->
+  <rect x="50" y="100" width="120" height="60" class="data" />
+  <text x="110" y="135" text-anchor="middle" class="text">JSON Data</text>
+  
+  <!-- Processing Layer -->
+  <rect x="250" y="80" width="300" height="100" class="box" />
+  <text x="400" y="100" text-anchor="middle" class="text">Data Processing Layer</text>
+  <rect x="270" y="110" width="120" height="50" class="component" />
+  <text x="330" y="140" text-anchor="middle" class="text">Processor</text>
+  <rect x="410" y="110" width="120" height="50" class="component" />
+  <text x="470" y="140" text-anchor="middle" class="text">Embeddings</text>
+  
+  <!-- Retrieval Layer -->
+  <rect x="250" y="220" width="300" height="100" class="box" />
+  <text x="400" y="240" text-anchor="middle" class="text">Retrieval Layer</text>
+  <rect x="270" y="250" width="120" height="50" class="component" />
+  <text x="330" y="280" text-anchor="middle" class="text">Advanced Retriever</text>
+  <rect x="410" y="250" width="120" height="50" class="component" />
+  <text x="470" y="280" text-anchor="middle" class="text">MMR</text>
+  
+  <!-- Cache System -->
+  <rect x="50" y="220" width="120" height="100" class="box" />
+  <text x="110" y="240" text-anchor="middle" class="text">Cache System</text>
+  <rect x="60" y="250" width="100" height="50" class="component" />
+  <text x="110" y="280" text-anchor="middle" class="text">Query Cache</text>
+  
+  <!-- Generation Layer -->
+  <rect x="250" y="360" width="300" height="100" class="box" />
+  <text x="400" y="380" text-anchor="middle" class="text">Generation Layer</text>
+  <rect x="270" y="390" width="260" height="50" class="component" />
+  <text x="400" y="420" text-anchor="middle" class="text">Gemini API</text>
+  
+  <!-- Evaluation Layer -->
+  <rect x="630" y="220" width="120" height="100" class="box" />
+  <text x="690" y="240" text-anchor="middle" class="text">Evaluation Layer</text>
+  <rect x="640" y="250" width="100" height="50" class="component" />
+  <text x="690" y="280" text-anchor="middle" class="text">RAG Evaluator</text>
+  
+  <!-- User Interface -->
+  <rect x="250" y="500" width="300" height="60" class="box" />
+  <text x="400" y="520" text-anchor="middle" class="text">User Interface</text>
+  <rect x="270" y="530" width="120" height="20" class="component" />
+  <text x="330" y="545" text-anchor="middle" class="text" font-size="12">Chat Interface</text>
+  <rect x="410" y="530" width="120" height="20" class="component" />
+  <text x="470" y="545" text-anchor="middle" class="text" font-size="12">Stats Dashboard</text>
+  
+  <!-- Arrows -->
+  <!-- Data flow -->
+  <line x1="170" y1="130" x2="250" y2="130" class="arrow" />
+  <line x1="400" y1="180" x2="400" y2="220" class="arrow" />
+  <line x1="400" y1="320" x2="400" y2="360" class="arrow" />
+  <line x1="400" y1="460" x2="400" y2="500" class="arrow" />
+  
+  <!-- Cache interaction -->
+  <line x1="170" y1="270" x2="250" y2="270" class="arrow" />
+  <line x1="250" y1="290" x2="170" y2="290" class="arrow" />
+  
+  <!-- Evaluation interaction -->
+  <line x1="550" y1="270" x2="630" y2="270" class="arrow" />
+  
+  <!-- User query flow -->
+  <line x1="400" y1="500" x2="400" y2="460" stroke-dasharray="5,5" class="arrow" />
+  
+  <!-- Legend -->
+  <rect x="630" y="500" width="15" height="15" class="data" />
+  <text x="650" y="513" class="text" font-size="12">Data</text>
+  
+  <rect x="630" y="520" width="15" height="15" class="box" />
+  <text x="650" y="533" class="text" font-size="12">System Layer</text>
+  
+  <rect x="630" y="540" width="15" height="15" class="component" />
+  <text x="650" y="553" class="text" font-size="12">Component</text>
+  
+  <line x1="630" y1="560" x2="645" y2="560" class="arrow" />
+  <text x="650" y="563" class="text" font-size="12">Data Flow</text>
+</svg>

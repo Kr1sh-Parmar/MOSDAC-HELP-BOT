@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}ISRO MOSDAC AI Help Bot{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="container hero-content">
+        <h1>ISRO MOSDAC AI Help Bot</h1>
+        <p>Access meteorological and oceanographic satellite data with the power of artificial intelligence</p>
+        <div class="hero-buttons">
+            <a href="{{ url_for('chat_interface') }}" class="btn btn-primary">Start Chatting</a>
+        </div>
+    </div>
+</section>
+
+<section class="features">
+    <div class="container">
+        <h2 class="section-title">Features</h2>
+        <div class="features-grid">
+            <div class="feature-card card">
+                <div class="feature-icon">
+                    <i class="fas fa-satellite"></i>
+                </div>
+                <h3>Satellite Data Access</h3>
+                <p>Easily query and retrieve information from ISRO's satellite data archives</p>
+            </div>
+            <div class="feature-card card">
+                <div class="feature-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>AI-Powered Responses</h3>
+                <p>Get accurate answers powered by advanced RAG technology and Google Gemini</p>
+            </div>
+            <div class="feature-card card">
+                <div class="feature-icon">
+                    <i class="fas fa-database"></i>
+                </div>
+                <h3>Comprehensive Knowledge</h3>
+                <p>Access a vast repository of meteorological and oceanographic information</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
