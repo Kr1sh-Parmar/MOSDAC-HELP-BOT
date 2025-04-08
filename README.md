@@ -80,3 +80,18 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 - MOSDAC for providing the data and resources
 - Contributors and maintainers of the project
+- Financial data APIs (list any you're using)
+- Firebase/MongoDB (specify your database)
+
+## Target Audience
+First-time investors, young professionals, and middle-class households in India seeking trustworthy financial advice.
+
+## Installation
+1. Clone this repository
+2. Install dependencies: `npm install`
+3. Configure environment variables
+4. Run the development server: `npm run dev`
+
+## Contribution Guidelines
+We welcome contributions! Please fork the repository and create a pull request with your changes.
+>>>>>>> 3908da484c91cbeb2eb4ff6e9cad221f4d4a93ac
